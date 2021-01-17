@@ -1,11 +1,21 @@
+from typing import List
+
 import typer
+
+from aptmarkreason.commands.install import install_packages
 
 app = typer.Typer()
 
 
 @app.command()
-def install(name: str):
-    typer.echo(f"Hello {name}")
+def install(
+    reason: str = typer.Argument(
+        ...,
+        help='Short keyword or text describing installation reason. Should be enclosed in double quotes (") if it contains spaces.',
+    ),
+    packages: List[str] = typer.Argument(..., help="List of packages to install"),
+):
+    install_packages(app, reason, packages)
 
 
 @app.command()
