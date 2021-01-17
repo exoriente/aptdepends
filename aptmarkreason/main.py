@@ -1,0 +1,28 @@
+import typer
+
+app = typer.Typer()
+
+
+@app.command()
+def install(name: str):
+    typer.echo(f"Hello {name}")
+
+
+@app.command()
+def uninstall(name: str, formal: bool = False):
+    if formal:
+        typer.echo(f"Goodbye Ms. {name}. Have a good day.")
+    else:
+        typer.echo(f"Bye {name}!")
+
+
+@app.command()
+def list(name: str, formal: bool = False):
+    if formal:
+        typer.echo(f"Goodbye Ms. {name}. Have a good day.")
+    else:
+        typer.echo(f"Bye {name}!")
+
+
+if __name__ == "__main__":
+    app()
