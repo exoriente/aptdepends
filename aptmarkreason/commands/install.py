@@ -1,19 +1,10 @@
 from typing import List
 
-from typer import Typer
-
-from aptmarkreason.registry.package_registry import (
-    PackageRegistry,
-    add_package_with_reason,
-)
-
-
-def is_package_installed(package: str) -> bool:
-    return True
-
-
-def is_package_marked_manual(package: str) -> bool:
-    return True
+import typer
+from apt.apt import get_system_status
+from exceptions import PackageNotFoundError
+from exceptions.output import output_exception
+from registry.package_registry import PackageRegistry, add_package_with_reason
 
 
 def mark_package_manual(package: str):
@@ -25,16 +16,20 @@ def perform_installation(package: str):
 
 
 def install_package(
-    typer: Typer, package_registry: PackageRegistry, reason: str, package: str
+    typer_app: typer.Typer, package_registry: PackageRegistry, reason: str, package: str
 ) -> PackageRegistry:
     try:
-        if is_package_installed(package):
-            if not is_package_marked_manual(package):
+        system_status = get_system_status()
+        if package not in system_status.installed_manual:
+            if package in system_status.installed_auto:
                 mark_package_manual(package)
-        else:
-            perform_installation(package)
+            elif package not in system_status.available:
+                raise PackageNotFoundError(package)
+            else:
+                perform_installation(package)
     except Exception as error:
-        raise error from error
+        output_exception(error)
+        raise typer.Exit(code=1) from error
     else:
         add_package_with_reason(package_registry, package, reason)
 
@@ -42,8 +37,11 @@ def install_package(
 
 
 def install_packages(
-    typer: Typer, package_registry: PackageRegistry, reason: str, packages: List[str]
+    typer_app: typer.Typer,
+    package_registry: PackageRegistry,
+    reason: str,
+    packages: List[str],
 ) -> PackageRegistry:
     for package in packages:
-        package_registry = install_package(typer, package_registry, reason, package)
+        package_registry = install_package(typer_app, package_registry, reason, package)
     return package_registry

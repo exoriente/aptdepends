@@ -1,8 +1,8 @@
 from typing import List
 
 import typer
-
-from aptmarkreason.commands.install import install_packages
+from commands.install import install_packages
+from registry.persist import load_package_registry, save_package_registry
 
 app = typer.Typer()
 
@@ -15,7 +15,9 @@ def install(
     ),
     packages: List[str] = typer.Argument(..., help="List of packages to install"),
 ):
-    install_packages(app, reason, packages)
+    save_package_registry(
+        install_packages(app, load_package_registry(), reason, packages)
+    )
 
 
 @app.command()
@@ -27,7 +29,7 @@ def uninstall(name: str, formal: bool = False):
 
 
 @app.command()
-def list(name: str, formal: bool = False):
+def list_registry(name: str, formal: bool = False):
     if formal:
         typer.echo(f"Goodbye Ms. {name}. Have a good day.")
     else:

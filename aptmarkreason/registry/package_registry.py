@@ -2,10 +2,8 @@ from dataclasses import dataclass
 from enum import Enum
 from typing import Dict, NamedTuple, Set
 
-Package = str
-Reason = str
-Packages = Set[Package]
-Reasons = Set[Reason]
+from basic_types import Package, Packages, Reason, Reasons
+
 PackagesByReason = Dict[Package, Reasons]
 ReasonsByPackage = Dict[Reason, Packages]
 
@@ -52,6 +50,10 @@ class PackageRegistry:
                 reasons_by_package[package] = {reason}
         return reasons_by_package
 
+    @staticmethod
+    def empty() -> "PackageRegistry":
+        return PackageRegistry(status_by_reason=dict(), package_reasons=set())
+
 
 def add_package_with_reason(
     package_registry: PackageRegistry, package: Package, reason: Reason
@@ -65,7 +67,11 @@ def add_package_with_reason(
 
 
 def add_reason(status_by_reason: StatusByReason, reason: Reason) -> StatusByReason:
-    return {reason: ReasonStatus.ACTIVE} | status_by_reason
+    # return {reason: ReasonStatus.ACTIVE} | status_by_reason  # todo: use as as soon as mypy support 3.9
+    if reason in status_by_reason:
+        return status_by_reason
+    else:
+        return dict(**status_by_reason, reason=ReasonStatus.ACTIVE)
 
 
 def add_package_reason(
