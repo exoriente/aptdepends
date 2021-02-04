@@ -2,7 +2,7 @@ from dataclasses import dataclass
 from enum import Enum
 from typing import Dict, NamedTuple, Set
 
-from basic_types import Package, Packages, Reason, Reasons
+from ..basic_types import Package, Packages, Reason, Reasons
 
 PackagesByReason = Dict[Package, Reasons]
 ReasonsByPackage = Dict[Reason, Packages]

@@ -1,16 +1,20 @@
 from typing import List
 
 import typer
-from exceptions.exceptions import DependenciesUnavailableError, PackageNameAlreadyExists
-from general import application_signature
-from shell.apt import (
+
+from ..exceptions.exceptions import (
+    DependenciesUnavailableError,
+    PackageNameAlreadyExists,
+)
+from ..general import application_signature
+from ..shell.apt import (
     PackageNameStatus,
     get_available_packages,
     get_package_name_status,
     install_deb,
     uninstall_deb,
 )
-from shell.equivs import (
+from ..shell.equivs import (
     configure_control_file,
     create_empty_control_file,
     create_package_file,

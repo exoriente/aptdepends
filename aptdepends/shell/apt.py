@@ -1,10 +1,10 @@
 from dataclasses import dataclass
 from pathlib import Path
 
-from basic_types import Packages
-from exceptions.exceptions import PackageCheckFailureError
-from general import application_signature
-from shell.shell import make_call_to_shell
+from ..basic_types import Packages
+from ..exceptions.exceptions import PackageCheckFailureError
+from ..general import application_signature
+from ..shell.shell import make_call_to_shell
 
 
 @dataclass(frozen=True)

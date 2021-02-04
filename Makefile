@@ -1,4 +1,4 @@
-paths = aptmarkreason
+paths = aptdepends tests
 
 isort:
 	isort $(paths)

@@ -1,8 +1,9 @@
 from typing import List
 
 import typer
-from commands.install import install_packages
-from registry.persist import load_package_registry, save_package_registry
+
+from .commands.install import install_packages
+from .registry.persist import load_package_registry, save_package_registry
 
 app = typer.Typer()
 

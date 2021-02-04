@@ -2,7 +2,7 @@ import json
 from pathlib import Path
 from typing import Dict, List, Set, Tuple
 
-from registry.package_registry import (
+from ..registry.package_registry import (
     PackageReason,
     PackageReasons,
     PackageRegistry,
@@ -10,7 +10,7 @@ from registry.package_registry import (
     StatusByReason,
 )
 
-REGISTRY_PATH = Path.home() / ".config" / "aptmarkreason"
+REGISTRY_PATH = Path.home() / ".config" / "apt-depends"
 REGISTRY_FILENAME = "package_registry.json"
 REGISTRY_FILE = REGISTRY_PATH / REGISTRY_FILENAME
 
