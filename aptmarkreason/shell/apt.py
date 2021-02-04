@@ -1,8 +1,9 @@
 from dataclasses import dataclass
+from pathlib import Path
 
 from basic_types import Packages
-from general import application_signature
 from exceptions.exceptions import PackageCheckFailureError
+from general import application_signature
 from shell.shell import make_call_to_shell
 
 
@@ -15,18 +16,6 @@ class PackageNameStatus:
 
 def get_available_packages() -> Packages:
     command = "apt-cache pkgnames"
-    result, stdout, stderr = make_call_to_shell(command.split())
-    return set(stdout)
-
-
-def get_auto_installed_packages() -> Packages:
-    command = "apt-mark showauto"
-    result, stdout, stderr = make_call_to_shell(command.split())
-    return set(stdout)
-
-
-def get_manual_installed_packages() -> Packages:
-    command = "apt-mark showmanual"
     result, stdout, stderr = make_call_to_shell(command.split())
     return set(stdout)
 
@@ -56,3 +45,13 @@ def get_package_name_status(package_name: str) -> PackageNameStatus:
         is_installed=is_installed,
         is_virtual_package=is_virtual_package,
     )
+
+
+def install_deb(package_file_path: Path):
+    command = f"sudo apt-get install {package_file_path.resolve()}"
+    result, stdout, stderr = make_call_to_shell(command.split())
+
+
+def uninstall_deb(package_name: str):
+    command = f"sudo dpkg -r {package_name}"
+    result, stdout, stderr = make_call_to_shell(command.split())

@@ -15,9 +15,7 @@ def install(
     ),
     packages: List[str] = typer.Argument(..., help="List of packages to install"),
 ):
-    save_package_registry(
-        install_packages(app, load_package_registry(), reason, packages)
-    )
+    save_package_registry(install_packages(reason, packages))
 
 
 @app.command()

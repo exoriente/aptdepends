@@ -29,3 +29,7 @@ class DependenciesUnavailableError(ApplicationError):
             f"The following dependency packages do not exist in the current apt cache: "
             f'    {", ".join(unavailable_dep_packages)}'
         )
+
+
+class UnexpectedShellResult(ApplicationError):
+    ...

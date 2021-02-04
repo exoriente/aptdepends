@@ -1,4 +1,4 @@
-APP_NAME = "apt-get-deps"
+APP_NAME = "apt-depends"
 
 
 def application_signature() -> str:
