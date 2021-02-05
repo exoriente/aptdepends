@@ -8,13 +8,11 @@ You can easily create and install a metapackage that has the required dependenci
 ## Example of use
 
 ```bash
-$ apt-depends install pyenv-dependencies build-essential libssl-dev zlib1g-dev libbz2-dev \
-libreadline-dev libsqlite3-dev wget curl llvm libncurses5-dev libncursesw5-dev \
-xz-utils tk-dev libffi-dev liblzma-dev python-openssl git
+$ apt-depends install pyenv-dependencies build-essential libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm libncurses5-dev libncursesw5-dev xz-utils tk-dev libffi-dev liblzma-dev python-openssl git
 ```
 
 The above command will create an empty metapackage with the name `pyenv-dependencies` and install it.
-All words after the new package name the names of packages the `pyenv-dependencies` will depend on
+All words after the new package name are the names of packages `pyenv-dependencies` will depend on
 and that will be automatically installed by as well, if they are not present on the system already.
 
 This results in:
