@@ -8,11 +8,13 @@ You can easily create and install a metapackage that has the required dependenci
 ## Example of use
 
 ```bash
-$ apt-depends install pyenv-dependencies build-essential libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm libncurses5-dev libncursesw5-dev xz-utils tk-dev libffi-dev liblzma-dev python-openssl git
+$ apt-depends install pyenv-dependencies build-essential libssl-dev zlib1g-dev libbz2-dev \
+libreadline-dev libsqlite3-dev wget curl llvm libncurses5-dev libncursesw5-dev \
+xz-utils tk-dev libffi-dev liblzma-dev python-openssl git
 ```
 
 The above command will create an empty metapackage with the name `pyenv-dependencies` and install it.
-All words after the new package name are the names of packages `pyenv-dependencies` will depend on
+All words after the new package name are names of packages the `pyenv-dependencies` will depend on
 and that will be automatically installed by as well, if they are not present on the system already.
 
 This results in:
@@ -22,7 +24,7 @@ This results in:
 
 In this example the packages mentioned are required to run the excellent python development tool `pyenv` ([link](https://github.com/pyenv/pyenv)) on Ubuntu.
 `pyenv` is not available by default as a `deb` package.
-Installing the packages using `apt-get` ot `apt` will also do the job, but will mark each package as manually installed,
+Installing the packages using `apt-get` or `apt` will also do the job, but will mark each package as manually installed,
 making it harder to identify and remove them if you don't need them anymore.
 
 ## Current status
